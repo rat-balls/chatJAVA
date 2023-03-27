@@ -55,7 +55,7 @@ public class Server implements Runnable {
                             nickname = messageSplit[1];
                         }
                     }else if(message.startsWith("/quit")){
-
+                        System.exit(0);
                     }else{
                         broadcast(nickname + ": " + message);
                     }
