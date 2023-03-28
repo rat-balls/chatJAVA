@@ -1,0 +1,42 @@
+Ethan: Hello
+Ethan: My name is Ethan :)
+Ethan: uwu
+Server: Ethan left
+Server: Ethanjoined
+Ethan: Hello
+Server: Ethan left
+Server: Ethanjoined
+Ethan: Hello my name is Ethan uwu
+Ethan: I'm all alone
+Server: Tgjoined
+Tg: tg
+Tg: 
+Tg: tg
+Tg: tg
+Tg: tg
+Tg: tg
+Ethan: lmao such a funny name xd
+Tg: Halo
+Tg: tg
+Ethan: ok nice
+Tg: /namechange tgtg
+Ethan: thank you for your input
+Server: Tg name change into : tgtg
+tgtg: tg
+Server: tgtg left
+Ethan: gonn cry
+Server: Ethan left
+Server: Roro joined
+      2023-16-28 03:16:03Roro: Hello
+      2023-16-28 03:16:06Roro: Someones here
+      2023-16-28 03:16:11Server: tg joined
+      2023-16-28 03:16:23tg: tg
+      2023-16-28 03:16:25Server: tg name change into : Ethan
+      2023-16-28 03:16:33Ethan: 
+      2023-16-28 03:16:33Ethan: Hrllo
+      2023-16-28 03:16:38Roro: e
+      2023-16-28 03:16:38Ethan: shut u^
+      2023-16-28 03:16:42Ethan: i hate
+      2023-16-28 03:16:46Server: Ethan left
+      2023-16-28 03:16:47Roro: /namechange oui
+      2023-16-28 03:16:49

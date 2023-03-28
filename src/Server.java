@@ -1,13 +1,17 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDateTime;
 
 public class Server implements Runnable {
     private ArrayList<ConnectionHandler> connections;
@@ -70,35 +74,54 @@ public class Server implements Runnable {
         @Override
         public void run() {
             try{
+                File logFile = new File("src/logs.txt");
+                if (logFile.createNewFile()) {
+                    System.out.println("File created: " + logFile.getName());
+                } else {
+                    System.out.println("File already exists.");
+                }
                 out = new PrintWriter(client.getOutputStream(), true);
                 in = new BufferedReader(new InputStreamReader(client.getInputStream()));
                 out.println("Please enter a nickname: ");
                 nickname = in.readLine();
                 //condition name
                 System.out.println(nickname + " connected");
-                broadcast(nickname + " joined");
+                broadcast("Server: " + nickname + " joined");
+                logMessage("Server: " + nickname + " joined\n");
                 String message;
                 while((message = in.readLine()) != null) {
                     String[] messageSplit = message.split(" ", 2);
-                    if (message.startsWith("/changename ")) {
+                    if (message.startsWith("/nick")) {
                         if (messageSplit.length == 2) {
-                            broadcast(nickname + " name change into : " + messageSplit[1]);
+                            broadcast("Server: " + nickname + " name change into : " + messageSplit[1]);
+                            logMessage("Server: " + nickname + " name change into : " + messageSplit[1] + "\n");
                             nickname = messageSplit[1];
                         }
-
-                    }else if(message.startsWith("/quit")){
-                        broadcast(nickname + "left");
+                    } else if (message.startsWith("/quit")) {
+                        broadcast("Server: " + nickname + " left");
+                        logMessage("Server: " + nickname + " left\n");
                         shutdown();
-                    }else{
+                    } else {
                         broadcast(nickname + ": " + message);
+                        logMessage(nickname + ": " + message + "\n");
                     }
                 }
             } catch (IOException e){
+                System.out.println("An error occurred.");
+                e.printStackTrace();
                 shutdown();
             }
         }
         public void sendMessage(String message){
                 out.println(message);
+        }
+
+        public void logMessage(String message) throws IOException {
+            FileWriter logWrite = new FileWriter("src/logs.txt", true);
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+            String date = dateFormat.format(new Date());
+            logWrite.write(date + "      "  + message);
+            logWrite.close();
         }
         public void shutdown(){
             try {
@@ -112,6 +135,7 @@ public class Server implements Runnable {
             }
         }
     }
+
     public static void main(String[] args) {
         Server server = new Server();
         server.run();
