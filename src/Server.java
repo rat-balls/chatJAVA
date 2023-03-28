@@ -97,6 +97,27 @@ public class Server implements Runnable {
                             logMessage("Server: " + nickname + " name change into : " + messageSplit[1] + "\n");
                             nickname = messageSplit[1];
                         }
+                    }else if(message.startsWith("/color ")){
+                        if(messageSplit[1] == "red"){
+
+                        }else if(messageSplit[1] == "orange"){
+
+                        }else if(messageSplit[1] == "green"){
+
+                        }else if(messageSplit[1] == "yellow"){
+
+                        }else if(messageSplit[1] == "blue"){
+
+                        }else if(messageSplit[1] == "purple"){
+
+                        }else if(messageSplit[1] == "cyan"){
+
+                        }else if(messageSplit[1] == "l-red"){
+
+                        }else if(messageSplit[1] == "l-purple"){
+
+                        }
+
                     } else if (message.startsWith("/quit")) {
                         broadcast("Server: " + nickname + " left");
                         logMessage("Server: " + nickname + " left\n");
