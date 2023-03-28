@@ -90,8 +90,8 @@ public class Server implements Runnable {
                 logMessage("Server: " + nickname + " joined\n");
                 String message;
                 while((message = in.readLine()) != null) {
-                    if (message.startsWith("/changename")) {
-                        String[] messageSplit = message.split(" ", 2);
+                    String[] messageSplit = message.split(" ", 2);
+                    if (message.startsWith("/nick")) {
                         if (messageSplit.length == 2) {
                             broadcast("Server: " + nickname + " name change into : " + messageSplit[1]);
                             logMessage("Server: " + nickname + " name change into : " + messageSplit[1] + "\n");
