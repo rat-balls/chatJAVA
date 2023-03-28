@@ -1,0 +1,6 @@
+2023-18-28 03:18:59      Server: Ethan joined
+2023-19-28 03:19:06      Ethan: Hello, I am Ethan
+2023-19-28 03:19:10      Ethan: Hihi
+2023-19-28 03:19:12      Ethan: It work
+2023-19-28 03:19:14      Ethan: I hate
+2023-19-28 03:19:18      Server: Ethan left
