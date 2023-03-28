@@ -5,6 +5,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -80,50 +81,50 @@ public class Server implements Runnable {
                 } else {
                     System.out.println("File already exists.");
                 }
+                String systemColor = "\033[0;33m";
+                String defaultColor = "\033[0m";
+                String color = "\033[0;32m";
                 out = new PrintWriter(client.getOutputStream(), true);
                 in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-                out.println("Please enter a nickname: ");
+                out.println(systemColor + "Please enter a nickname: " + defaultColor);
                 nickname = in.readLine();
                 //condition name
                 System.out.println(nickname + " connected");
-                broadcast("Server: " + nickname + " joined");
+                broadcast(systemColor + "Server: " + nickname + " joined" + defaultColor);
                 logMessage("Server: " + nickname + " joined\n");
                 String message;
                 while((message = in.readLine()) != null) {
                     String[] messageSplit = message.split(" ", 2);
-                    if (message.startsWith("/nick")) {
+                    if (message.startsWith("/nick ")) {
                         if (messageSplit.length == 2) {
-                            broadcast("Server: " + nickname + " name change into : " + messageSplit[1]);
+                            broadcast(systemColor + "Server: " + color + nickname + systemColor + " name change into : " + messageSplit[1] + defaultColor);
                             logMessage("Server: " + nickname + " name change into : " + messageSplit[1] + "\n");
                             nickname = messageSplit[1];
                         }
                     }else if(message.startsWith("/color ")){
-                        if(messageSplit[1] == "red"){
-
-                        }else if(messageSplit[1] == "orange"){
-
-                        }else if(messageSplit[1] == "green"){
-
-                        }else if(messageSplit[1] == "yellow"){
-
-                        }else if(messageSplit[1] == "blue"){
-
-                        }else if(messageSplit[1] == "purple"){
-
-                        }else if(messageSplit[1] == "cyan"){
-
-                        }else if(messageSplit[1] == "l-red"){
-
-                        }else if(messageSplit[1] == "l-purple"){
-
+                        if(Objects.equals(messageSplit[1], "red")){
+                            color = "\033[0;31m";
+                        }else if(Objects.equals(messageSplit[1], "green")){
+                            color = "\033[0;32m";
+                        }else if(Objects.equals(messageSplit[1], "blue")){
+                            color = "\033[0;34m";
+                        }else if(Objects.equals(messageSplit[1], "purple")){
+                            color = "\033[0;35m";
+                        }else if(Objects.equals(messageSplit[1], "cyan")){
+                            color = "\033[0;36m";
+                        }else if(Objects.equals(messageSplit[1], "lred")){
+                            color = "\033[1;31m";
+                        }else if(Objects.equals(messageSplit[1], "lpurple")){
+                            color = "\033[1;35m";
                         }
+                        broadcast(systemColor + "Server: " + color + nickname + " has changed colors." + defaultColor);
 
                     } else if (message.startsWith("/quit")) {
-                        broadcast("Server: " + nickname + " left");
+                        broadcast(systemColor + "Server: " + nickname + " left" + defaultColor);
                         logMessage("Server: " + nickname + " left\n");
                         shutdown();
                     } else {
-                        broadcast(nickname + ": " + message);
+                        broadcast(color + nickname + ": " + message + defaultColor);
                         logMessage(nickname + ": " + message + "\n");
                     }
                 }

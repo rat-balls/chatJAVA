@@ -4,3 +4,27 @@
 2023-19-28 03:19:12      Ethan: It work
 2023-19-28 03:19:14      Ethan: I hate
 2023-19-28 03:19:18      Server: Ethan left
+2023-40-28 03:40:15      Server: null joined
+2023-50-28 03:50:18      Server: Ethan joined
+2023-50-28 03:50:23      Ethan: Hello :)
+2023-51-28 03:51:20      Server: Ethan joined
+2023-51-28 03:51:24      Ethan: Hello :)
+2023-51-28 03:51:34      Ethan: Hello :)
+2023-51-28 03:51:57      Ethan: Hello :)
+2023-53-28 03:53:54      Server: Ethan joined
+2023-53-28 03:53:58      Ethan: hello :)
+2023-54-28 03:54:20      Ethan: hello :)
+2023-54-28 03:54:40      Ethan: hello :)
+2023-55-28 03:55:17      Server: Barboj joined
+2023-55-28 03:55:20      Barboj: Hello :)
+2023-55-28 03:55:30      Barboj: Hello :)
+2023-55-28 03:55:36      Barboj: [C[A
+2023-55-28 03:55:38      Barboj: 
+2023-55-28 03:55:39      Barboj: 
+2023-55-28 03:55:39      Barboj: 
+2023-55-28 03:55:39      Barboj: 
+2023-55-28 03:55:39      Barboj: 
+2023-55-28 03:55:39      Barboj: 
+2023-55-28 03:55:39      Barboj: 
+2023-55-28 03:55:39      Barboj: 
+2023-55-28 03:55:49      Barboj: Hello :)
