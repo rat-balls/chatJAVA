@@ -28,8 +28,8 @@ public class Server implements Runnable {
                 ch.sendMessage(message);
             }
         }
-        
     }
+
     class ConnectionHandler implements Runnable {
 
         private Socket client;
@@ -49,6 +49,15 @@ public class Server implements Runnable {
                 out.println("Please enter a nickname: ");
                 nickname = in.readLine();
                 System.out.println(nickname +" is connected");
+                broadcast(nickname+" joined the chat!");
+                String message;
+                while((message = in.readLine()) != null){
+                    if(message.startsWith("/nick ")){
+                        String
+                    }else if (message.startsWith("/quit")){
+                        //TODO: quit
+                    }
+                }
 
             } catch (IOException e) {
                 // TODO: handle
