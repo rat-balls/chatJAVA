@@ -78,13 +78,14 @@ public class Server implements Runnable {
                 System.out.println(nickname + " connected");
                 broadcast(nickname + " joined");
                 String message;
-                while((message = in.readLine()) != null){
-                    if(message.startsWith("/changename ")){
-                        String[] messageSplit = message.split(" ", 2);
-                        if(messageSplit.length == 2){
+                while((message = in.readLine()) != null) {
+                    String[] messageSplit = message.split(" ", 2);
+                    if (message.startsWith("/changename ")) {
+                        if (messageSplit.length == 2) {
                             broadcast(nickname + " name change into : " + messageSplit[1]);
                             nickname = messageSplit[1];
                         }
+
                     }else if(message.startsWith("/quit")){
                         broadcast(nickname + "left");
                         shutdown();
