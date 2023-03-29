@@ -6,13 +6,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDateTime;
 
 public class Server implements Runnable {
     private ArrayList<ConnectionHandler> connections;
@@ -75,7 +73,7 @@ public class Server implements Runnable {
         @Override
         public void run() {
             try{
-                File logFile = new File("src/logs.txt");
+                File logFile = new File("src/logs");
                 if (logFile.createNewFile()) {
                     System.out.println("File created: " + logFile.getName());
                 } else {
@@ -95,9 +93,9 @@ public class Server implements Runnable {
                 String message;
                 while((message = in.readLine()) != null) {
                     String[] messageSplit = message.split(" ", 2);
-                    if (message.startsWith("/nick ")) {
+                    if (message.startsWith("/name ")) {
                         if (messageSplit.length == 2) {
-                            broadcast(systemColor + "Server: " + color + nickname + systemColor + " name change into : " + messageSplit[1] + defaultColor);
+                            broadcast(systemColor + "Server: " + color + nickname + systemColor + " name change into: " + color + messageSplit[1] + defaultColor);
                             logMessage("Server: " + nickname + " name change into : " + messageSplit[1] + "\n");
                             nickname = messageSplit[1];
                         }
@@ -119,6 +117,10 @@ public class Server implements Runnable {
                         }
                         broadcast(systemColor + "Server: " + color + nickname + " has changed colors." + defaultColor);
 
+                    } else if (message.startsWith("/img ")) {
+                        if (messageSplit.length == 2) {
+                            ShowPicture.show();
+                        }
                     } else if (message.startsWith("/quit")) {
                         broadcast(systemColor + "Server: " + nickname + " left" + defaultColor);
                         logMessage("Server: " + nickname + " left\n");
@@ -139,7 +141,7 @@ public class Server implements Runnable {
         }
 
         public void logMessage(String message) throws IOException {
-            FileWriter logWrite = new FileWriter("src/logs.txt", true);
+            FileWriter logWrite = new FileWriter("src/logs", true);
             DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
             String date = dateFormat.format(new Date());
             logWrite.write(date + "      "  + message);
