@@ -119,7 +119,7 @@ public class Server implements Runnable {
 
                     } else if (message.startsWith("/img ")) {
                         if (messageSplit.length == 2) {
-                            ShowPicture.show();
+                            ShowPicture.show(messageSplit[1]);
                         }
                     } else if (message.startsWith("/quit")) {
                         broadcast(systemColor + "Server: " + nickname + " left" + defaultColor);
@@ -142,7 +142,7 @@ public class Server implements Runnable {
 
         public void logMessage(String message) throws IOException {
             FileWriter logWrite = new FileWriter("src/logs", true);
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
             String date = dateFormat.format(new Date());
             logWrite.write(date + "      "  + message);
             logWrite.close();
