@@ -119,7 +119,7 @@ public class Server implements Runnable {
 
                     } else if (message.startsWith("/img ")) {
                         if (messageSplit.length == 2) {
-                            ShowPicture.show();
+                            ShowPicture.show(messageSplit[1]);
                         }
                     } else if (message.startsWith("/quit")) {
                         broadcast(systemColor + "Server: " + nickname + " left" + defaultColor);
