@@ -1,3 +1,4 @@
+import javax.imageio.IIOException;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -119,7 +120,7 @@ public class Server implements Runnable {
 
                     } else if (message.startsWith("/img ")) {
                         if (messageSplit.length == 2) {
-                            ShowPicture.show(messageSplit[1]);
+                            Client.imgDisplay(messageSplit[1]);
                         }
                     } else if (message.startsWith("/quit")) {
                         broadcast(systemColor + "Server: " + nickname + " left" + defaultColor);
