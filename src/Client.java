@@ -10,7 +10,7 @@ public class Client implements Runnable{
     @Override
     public void run() {
         try{
-            client = new Socket("6.tcp.eu.ngrok.io", 19437);
+            client = new Socket("7.tcp.eu.ngrok.io", 12824);
             out = new PrintWriter(client.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(client.getInputStream()));
             InputHandler inputHandler = new InputHandler();
