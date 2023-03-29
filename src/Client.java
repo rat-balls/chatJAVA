@@ -1,3 +1,4 @@
+import javax.imageio.IIOException;
 import java.io.*;
 import java.net.Socket;
 
@@ -46,6 +47,7 @@ public class Client implements Runnable{
                 BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
                 while (!done) {
                     String message = inputReader.readLine();
+
                     if (message.equals("/quit")) {
                         out.println(message);
                         inputReader.close();
@@ -57,6 +59,14 @@ public class Client implements Runnable{
             } catch (IOException e) {
                 shutdown();
             }
+        }
+    }
+
+    public static void imgDisplay(String msg){
+        try{
+            ShowPicture.show(msg);
+        } catch (IIOException e){
+            System.out.println("File not found.");
         }
     }
     public static void main(String[] args) {
