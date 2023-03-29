@@ -18,6 +18,7 @@ public class Server implements Runnable {
     private ServerSocket server;
     private boolean done;
     private ExecutorService pool;
+    File file = new File("src/logs");
 
     public Server(){
         done = false;
@@ -26,7 +27,7 @@ public class Server implements Runnable {
     @Override
     public void run(){
         try {
-            server = new ServerSocket(9070);
+            server = new ServerSocket(12824);
             pool = Executors.newCachedThreadPool();
             while (!done) {
                 Socket client = server.accept();
@@ -122,7 +123,11 @@ public class Server implements Runnable {
                         if (messageSplit.length == 2) {
                             Client.imgDisplay(messageSplit[1]);
                         }
-                    } else if (message.startsWith("/quit")) {
+                    } else if(message.startsWith("/report")){
+                        logMessage(nickname + " sent a report" + "\n");
+                        reportMessage(tail(file, 10));
+                    }
+                    else if (message.startsWith("/quit")) {
                         broadcast(systemColor + "Server: " + nickname + " left" + defaultColor);
                         logMessage("Server: " + nickname + " left\n");
                         shutdown();
@@ -148,6 +153,12 @@ public class Server implements Runnable {
             logWrite.write(date + "      "  + message);
             logWrite.close();
         }
+        public void reportMessage(String messages) throws IOException{
+            FileWriter reportWrite = new FileWriter("src/report", true);
+            reportWrite.write(messages + "\n" + "-".repeat(60) + "\n");
+
+            reportWrite.close();
+        }
         public void shutdown(){
             try {
                 in.close();
@@ -158,6 +169,51 @@ public class Server implements Runnable {
             }catch (IOException e){
 
             }
+        }
+    }
+    public String tail( File file, int lines) throws IOException {
+        java.io.RandomAccessFile fileHandler = null;
+        FileWriter logWrite = new FileWriter("src/report", true);
+        try {
+            fileHandler = new java.io.RandomAccessFile( file, "r" );
+            long fileLength = fileHandler.length() - 1;
+            StringBuilder sb = new StringBuilder();
+            int line = 0;
+
+            for(long filePointer = fileLength; filePointer != -1; filePointer--){
+                fileHandler.seek( filePointer );
+                int readByte = fileHandler.readByte();
+
+                if( readByte == 0xA ) {
+                    if (filePointer < fileLength) {
+                        line = line + 1;
+                    }
+                } else if( readByte == 0xD ) {
+                    if (filePointer < fileLength-1) {
+                        line = line + 1;
+                    }
+                }
+                if (line >= lines) {
+                    break;
+                }
+                sb.append( ( char ) readByte );
+            }
+
+            String lastLine = sb.reverse().toString();
+            return lastLine;
+        } catch( java.io.FileNotFoundException e ) {
+            e.printStackTrace();
+            return null;
+        } catch( java.io.IOException e ) {
+            e.printStackTrace();
+            return null;
+        }
+        finally {
+            if (fileHandler != null )
+                try {
+                    fileHandler.close();
+                } catch (IOException e) {
+                }
         }
     }
 
